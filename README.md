@@ -1,8 +1,13 @@
+<a href="https://github.com/yigitbuyukeren/sohbet-ozeti#-nasıl-kullanılır">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/banner-dark.jpg">
+    <img src="docs/banner-light.jpg" width="100%" alt="Sohbet Özeti: WhatsApp sohbetini tarayıcında analiz et, hiçbir şey gönderilmez. Bağımlılıksız, MIT lisanslı.">
+  </picture>
+</a>
+
 <div align="center">
 
-# 💬 Sohbet Özeti
-
-**WhatsApp sohbetini sürükle bırak: kim ne kadar yazıyor, en çok ne zaman konuşuyorsunuz, kim geç cevap veriyor?**
+**[🚀 Nasıl kullanılır](#-nasıl-kullanılır)** &nbsp;·&nbsp; **[📊 Neler çıkıyor](#-neler-çıkıyor)** &nbsp;·&nbsp; **[🐞 Sorun bildir](https://github.com/yigitbuyukeren/sohbet-ozeti/issues)**
 
 [![Lisans: MIT](https://img.shields.io/badge/lisans-MIT-139a63?style=flat-square&labelColor=121411)](LICENSE)
 ![Bağımlılık](https://img.shields.io/badge/ba%C4%9F%C4%B1ml%C4%B1l%C4%B1k-0-139a63?style=flat-square&labelColor=121411)
@@ -17,6 +22,15 @@
 <summary><h2>🇹🇷 Türkçe</h2></summary>
 
 Dışa aktardığın WhatsApp sohbet dosyasını (`.txt` ya da `.zip`) sayfaya bırakırsın, tarayıcın analiz eder ve sonucu gösterir. **Sunucu, hesap, yükleme yok; sohbetin cihazından çıkmaz.**
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/ekran-dark.jpg">
+    <img src="docs/ekran-light.jpg" width="720" alt="Sohbet Özeti arayüzü: tarih ve kişi filtresi, mesaj sayıları ve kişi başına istatistik kartları. Gösterilen sohbet uydurmadır.">
+  </picture>
+</p>
+
+<p align="center"><sub>Ekran görüntüsündeki sohbet uydurmadır (örnek sohbet düğmesi).</sub></p>
 
 | 🔒 **%100 yerel** | 📊 **Zengin özet** | 🖼️ **Paylaşılabilir** | 🧩 **Bağımlılıksız** |
 |:---:|:---:|:---:|:---:|

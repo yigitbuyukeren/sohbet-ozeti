@@ -69,7 +69,6 @@
         }
         if (r() < 0.01) metin = 'Bu mesaj silindi';
         satirlar.push(`${zaman} - ${kisi.ad}: ${metin}`);
-        if (r() < 0.02) satirlar.push('ikinci satır da var,', 'bir mesaj birden fazla satır olabilir');
         onceki = kisi;
         if (gecelik) break;
       }
