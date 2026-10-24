@@ -1,0 +1,10 @@
+{
+  "name": "sohbet-ozeti",
+  "version": "1.0.0",
+  "private": true,
+  "description": "WhatsApp sohbet dışa aktarımını tarayıcıda, hiçbir şey göndermeden analiz eder.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test"
+  }
+}

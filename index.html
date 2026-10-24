@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Sohbet Özeti</title>
+  <meta name="description" content="WhatsApp sohbetini sürükle bırak: kim ne kadar yazıyor, en çok ne zaman konuşuyorsunuz? Her şey tarayıcında kalır, hiçbir şey gönderilmez.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+  <main class="sayfa">
+    <header class="ust">
+      <p class="rozet"><span class="nokta"></span> Hiçbir şey sunucuya gitmez</p>
+      <h1>Sohbet Özeti</h1>
+      <p class="alt">WhatsApp sohbetini bu sayfaya bırak. Kim ne kadar yazıyor, en çok ne zaman konuşuyorsunuz, kim daha geç cevap veriyor? Hepsi senin tarayıcında hesaplanır.</p>
+    </header>
+
+    <section id="yukle" class="yukle">
+      <label id="birak" class="birak" tabindex="0" for="dosya">
+        <span class="birak-ikon" aria-hidden="true">💬</span>
+        <strong>Sohbet dosyasını buraya sürükle</strong>
+        <span>ya da seçmek için tıkla (.txt veya .zip)</span>
+        <input id="dosya" type="file" accept=".txt,.zip,text/plain,application/zip">
+      </label>
+      <div class="eylemler">
+        <button id="ornek" type="button" class="dugme ikincil">Örnek sohbetle dene</button>
+      </div>
+      <p id="hata" class="hata" role="alert" hidden></p>
+
+      <details class="nasil">
+        <summary>Sohbeti nasıl dışa aktarırım?</summary>
+        <ol>
+          <li>WhatsApp'ta sohbeti aç, üstteki ada dokun.</li>
+          <li><b>Sohbeti dışa aktar</b>'ı seç (Android'de ⋮ menüsü → Diğer → Sohbeti dışa aktar).</li>
+          <li><b>Medyasız</b> seçeneğini seç. Dosya küçük olur, analiz için medya gerekmez.</li>
+          <li>Çıkan <code>.txt</code> ya da <code>.zip</code> dosyasını buraya bırak.</li>
+        </ol>
+      </details>
+    </section>
+
+    <section id="sonuc" class="sonuc" hidden></section>
+
+    <footer class="alt-bilgi">
+      <p>Sayfa dışarıya bağlanamaz: tarayıcıya "ağ isteği yapma" diyen bir güvenlik politikası içerir ve kaynak kodu açıktır.</p>
+      <p><a href="https://github.com/yigitbuyukeren/sohbet-ozeti">Kaynak kodu</a> · MIT lisanslı</p>
+    </footer>
+  </main>
+
+  <script src="src/zip.js"></script>
+  <script src="src/parser.js"></script>
+  <script src="src/stats.js"></script>
+  <script src="src/ornek.js"></script>
+  <script src="src/kart.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>
