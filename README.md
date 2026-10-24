@@ -7,7 +7,7 @@
 
 <div align="center">
 
-**[🚀 Nasıl kullanılır](#-nasıl-kullanılır)** &nbsp;·&nbsp; **[📊 Neler çıkıyor](#-neler-çıkıyor)** &nbsp;·&nbsp; **[🐞 Sorun bildir](https://github.com/yigitbuyukeren/sohbet-ozeti/issues)**
+**[🌐 Canlı demo](https://yigitbuyukeren.github.io/sohbet-ozeti/)** &nbsp;·&nbsp; **[🚀 Nasıl kullanılır](#-nasıl-kullanılır)** &nbsp;·&nbsp; **[📊 Neler çıkıyor](#-neler-çıkıyor)** &nbsp;·&nbsp; **[🐞 Sorun bildir](https://github.com/yigitbuyukeren/sohbet-ozeti/issues)**
 
 [![Lisans: MIT](https://img.shields.io/badge/lisans-MIT-139a63?style=flat-square&labelColor=121411)](LICENSE)
 ![Bağımlılık](https://img.shields.io/badge/ba%C4%9F%C4%B1ml%C4%B1l%C4%B1k-0-139a63?style=flat-square&labelColor=121411)
@@ -38,7 +38,7 @@ Dışa aktardığın WhatsApp sohbet dosyasını (`.txt` ya da `.zip`) sayfaya b
 
 ### 🚀 Nasıl kullanılır
 1. 📱 WhatsApp'ta sohbeti aç → **Sohbeti dışa aktar** → **Medyasız**.
-2. 🌐 Sayfayı aç (aşağıya bak) ve dosyayı üstüne bırak. İstersen önce **Örnek sohbetle dene** düğmesine bas.
+2. 🌐 [Canlı demoyu](https://yigitbuyukeren.github.io/sohbet-ozeti/) aç (ya da aşağıdaki gibi kendi bilgisayarında çalıştır) ve dosyayı üstüne bırak. İstersen önce **Örnek sohbetle dene** düğmesine bas.
 3. 🖼️ Beğendiğin özeti **PNG** olarak indir.
 
 Sayfayı kendi bilgisayarında açmak için:
@@ -95,7 +95,7 @@ Drop an exported WhatsApp chat (`.txt` or `.zip`) on the page and your browser t
 
 **What you get:** message totals and streaks, per-person share, words per message and median reply time, reply-time and message-length distributions, double-texting rate, a weekday × hour heatmap, monthly and weekly timelines, phrase counters (love, thanks, sorry…), top words, word pairs and distinctive words per person, shared link domains, a rough lexicon-based sentiment balance, a who-replies-to-whom matrix for groups, and playful titles. Filter by date range and people. Download two story-sized PNG cards (numbers only, no message text), plus JSON and CSV with statistics only.
 
-**Run it:** `python3 -m http.server 8000`, then open `http://localhost:8000`. Try **"Örnek sohbetle dene"** for a fake demo chat.
+**Run it:** open the [live demo](https://yigitbuyukeren.github.io/sohbet-ozeti/), or `python3 -m http.server 8000`, then open `http://localhost:8000`. Try **"Örnek sohbetle dene"** for a fake demo chat.
 
 **How it works:** a parser for the Android and iOS export formats (12/24-hour clocks, day/month order inferred from the data, multi-line messages), a dependency-free zip reader built on `DecompressionStream`, and a pure statistics module covered by `node --test`. Charts are hand-written SVG.
 
