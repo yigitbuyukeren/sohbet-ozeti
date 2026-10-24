@@ -93,3 +93,13 @@ test('Örnek sohbet: ayrışır, aynı çıktıyı verir, unvanlar dağıtılır
   assert.ok(Object.keys(s.titles).length >= 2);
   assert.equal(new Set(Object.values(s.titles)).size, Object.values(s.titles).length);
 });
+
+test('Altyazılı medyanın kelimeleri sayılır, mesaj yine de medya olarak kalır', () => {
+  const s = hesap('24.10.2026 14:00 - A: harika manzara görüntü dahil edilmedi\n24.10.2026 14:01 - B: tamam');
+  const a = s.people.find(p => p.name === 'A');
+  assert.equal(a.mediaTotal, 1);
+  assert.equal(a.textMessages, 0);
+  assert.equal(a.words, 2);
+  assert.equal(s.mediaCount, 1);
+  assert.equal(s.textCount, 1);
+});

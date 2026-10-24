@@ -14,7 +14,7 @@
     '(?:\\]\\s?|\\s[-–]\\s)' +
     '([\\s\\S]*)$'
   );
-  const GONDEREN = /^([^:\n“"]{1,40}?): ([\s\S]*)$/;
+  const GONDEREN = /^([^:\n“"]{1,40}?):(?: ([\s\S]*)|\s*)$/;
 
   const SILINDI = /^(bu mesaj silindi|bu mesajı sildiniz|you deleted this message|this message was deleted)\.?$/i;
   const MEDYA_YER = /^<(?:medya|media) (?:dahil edilmedi|omitted)>$/i;
@@ -23,23 +23,26 @@
     ['video', /(video|gif)\s+(dahil edilmedi|omitted)/i],
     ['audio', /(ses|audio|sesli mesaj|voice message)\s+(dahil edilmedi|omitted)/i],
     ['sticker', /(çıkartma|sticker)\s+(dahil edilmedi|omitted)/i],
-    ['other', /(belge|document|dosya|file)\s+(dahil edilmedi|omitted)/i],
+    ['other', /(belge|document|dosya|file|kişi kartı|contact card|konum|location)\s+(dahil edilmedi|omitted)$/i],
   ];
 
+  // iOS, medyaya yazılan altyazıyı yer tutucudan önce yazar: "altyazı görüntü dahil edilmedi".
+  // Dönüş: { tur, altyazi } ya da null
   function medyaTuru(metin) {
     const t = metin.trim();
-    if (MEDYA_YER.test(t)) return 'other';
+    if (MEDYA_YER.test(t)) return { tur: 'other', altyazi: '' };
     for (const [tur, re] of MEDYA_TUR) {
-      if (re.test(t) && t.length < 60) return tur;
+      const e = re.exec(t);
+      if (e && /(dahil edilmedi|omitted)$/i.test(t)) return { tur, altyazi: tur === 'other' ? '' : t.slice(0, e.index).trim() };
     }
     const ek = t.match(/^<attached: (.+)>$/i) || t.match(/^(.+?) \((?:dosya ekli|file attached)\)$/i);
     if (ek) {
       const ad = ek[1].toLowerCase();
-      if (/\.(jpe?g|png|heic)$|photo/.test(ad)) return 'photo';
-      if (/\.(mp4|mov|3gp)$|video|gif/.test(ad)) return 'video';
-      if (/\.(opus|m4a|aac|mp3|ogg|amr)$|audio|ptt/.test(ad)) return 'audio';
-      if (/\.webp$|sticker/.test(ad)) return 'sticker';
-      return 'other';
+      if (/\.(jpe?g|png|heic)$|photo/.test(ad)) return { tur: 'photo', altyazi: '' };
+      if (/\.(mp4|mov|3gp)$|video|gif/.test(ad)) return { tur: 'video', altyazi: '' };
+      if (/\.(opus|m4a|aac|mp3|ogg|amr)$|audio|ptt/.test(ad)) return { tur: 'audio', altyazi: '' };
+      if (/\.webp$|sticker/.test(ad)) return { tur: 'sticker', altyazi: '' };
+      return { tur: 'other', altyazi: '' };
     }
     return null;
   }
@@ -98,16 +101,17 @@
       if (!g) { sistem++; continue; }
 
       const gonderen = g[1].trim();
-      const govde = g[2].replace(/\s+$/, '');
+      const govde = (g[2] || '').replace(/\s+$/, '');
       let tur = 'text';
       let medya = null;
+      let metinKismi = '';
       if (SILINDI.test(govde.trim())) {
         tur = 'deleted';
       } else {
-        medya = medyaTuru(govde);
-        if (medya) tur = 'media';
+        const md = medyaTuru(govde);
+        if (md) { tur = 'media'; medya = md.tur; metinKismi = md.altyazi; }
       }
-      mesajlar.push({ t, ms: t.getTime(), sender: gonderen, text: tur === 'text' ? govde : '', type: tur, media: medya });
+      mesajlar.push({ t, ms: t.getTime(), sender: gonderen, text: tur === 'text' ? govde : metinKismi, type: tur, media: medya });
     }
 
     mesajlar.sort((x, y) => x.ms - y.ms);

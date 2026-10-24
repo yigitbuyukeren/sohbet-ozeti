@@ -79,3 +79,27 @@ test('Gönderen adındaki iki nokta üst üste yalnızca ilk ": " ile ayrılır'
   assert.equal(r.messages[0].sender, 'Ali');
   assert.equal(r.messages[0].text, 'saat 14:30: görüşürüz');
 });
+
+test('Kişi kartı ve konum yer tutucuları medya sayılır', () => {
+  const r = parseChat([
+    '24.10.2026 14:00 - A: Kişi kartı dahil edilmedi',
+    '24.10.2026 14:01 - A: rapor.ods belge dahil edilmedi',
+    '24.10.2026 14:02 - A: konum dahil edilmedi',
+  ].join('\n'));
+  assert.deepEqual(r.messages.map(m => m.type), ['media', 'media', 'media']);
+  assert.deepEqual(r.messages.map(m => m.text), ['', '', '']);
+});
+
+test('iOS altyazılı medya: yazı korunur, mesaj medya sayılır', () => {
+  const r = parseChat('[24.10.2026 14:00:00] A: bak ne buldum görüntü dahil edilmedi');
+  assert.equal(r.messages[0].type, 'media');
+  assert.equal(r.messages[0].media, 'photo');
+  assert.equal(r.messages[0].text, 'bak ne buldum');
+});
+
+test('Gövdesi boş mesaj (Ad: ve sonrası boş) sistem mesajı sayılmaz', () => {
+  const r = parseChat('24.10.2026 14:00 - Ali:\n24.10.2026 14:01 - Veli: selam');
+  assert.equal(r.messages.length, 2);
+  assert.equal(r.systemCount, 0);
+  assert.equal(r.messages[0].text, '');
+});

@@ -78,9 +78,9 @@
 
       if (m.type === 'media') { k.media[m.media || 'other']++; k.mediaTotal++; medyaSayisi++; }
       else if (m.type === 'deleted') { k.deleted++; silinenSayisi++; }
-      else {
-        metinSayisi++;
-        k.textMessages++;
+      if (m.type === 'text') { metinSayisi++; k.textMessages++; }
+      // altyazılı medyanın yazısı da kelime ve emoji sayımına girer
+      if (m.text) {
         k.chars += m.text.length;
         if (m.text.length > k.longest.len) k.longest = { len: m.text.length, preview: m.text.slice(0, 140) };
         if (m.text.length > enUzun.len) enUzun = { sender: m.sender, len: m.text.length, preview: m.text.slice(0, 140) };
