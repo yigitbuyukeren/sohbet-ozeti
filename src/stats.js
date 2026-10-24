@@ -191,7 +191,7 @@
     return sonuc;
   }
 
-  const api = { hesapla };
+  const api = { hesapla, DURDURMA };
   if (typeof module === 'object' && module.exports) module.exports = api;
   root.SohbetOzeti = Object.assign(root.SohbetOzeti || {}, api);
 })(typeof globalThis !== 'undefined' ? globalThis : this);
