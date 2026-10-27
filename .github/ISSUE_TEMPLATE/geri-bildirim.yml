@@ -1,0 +1,35 @@
+name: Geri bildirim / deneme raporu
+description: Denedin mi? Ne çalıştı, ne çalışmadı? Kısa bir not yeter.
+title: "Geri bildirim: "
+labels: [geri-bildirim]
+body:
+  - type: markdown
+    attributes:
+      value: "Kullanım deneyimini paylaştığın için teşekkürler. Lütfen kişisel veri, konum, fotoğraf veya sohbet içeriği paylaşma; gerekiyorsa örneği anonimleştir."
+  - type: input
+    attributes:
+      label: "Tarayıcı"
+      description: "Örn. Chrome 130"
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: "Dışa aktarım biçimi"
+      options:
+        - "Android"
+        - "iOS"
+        - "Bilmiyorum"
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: "Ne denedin ve sonuç ne oldu?"
+      description: "Sayfa dosyayı doğru okudu mu? Sohbet içeriği paylaşma, gerekirse anonimleştirilmiş bir satır ekle."
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: "Önerin var mı?"
+      description: "Hiçbir şey yazmasan da olur."
+    validations:
+      required: false
