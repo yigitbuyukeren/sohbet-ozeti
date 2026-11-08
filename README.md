@@ -78,6 +78,10 @@ Sonra tarayıcıda `http://localhost:8000` adresini aç. (`index.html`'e çift t
 - Örnek sohbet ve testlerdeki veriler uydurmadır; gerçek bir sohbet depoda bulunmaz.
 
 ### 🛠️ Geliştirme
+
+Hızlı kontrol için ilgili test dosyasını seçebilirsin; örneğin
+`node --test tests/parser.test.js`. Teslimden önce tüm testleri çalıştır:
+
 ```bash
 npm test        # node --test, bağımlılık kurmak gerekmez (Node 18+)
 ```
