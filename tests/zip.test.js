@@ -44,7 +44,27 @@ test('Saklı (yöntem 0) zip içinden sohbeti çıkarır', async () => {
 });
 
 test('Deflate (yöntem 8) zip içinden sohbeti çıkarır', async () => {
-  assert.equal(await zipdenMetin(zipKur('_chat.txt', METIN.repeat(50), 8)), METIN.repeat(50));
+  const gercek = globalThis.DecompressionStream;
+  try {
+    try { new gercek('deflate-raw'); }
+    catch {
+      // Node 18 bu biçimi desteklemez; yalnız test ortamında eşdeğer akış.
+      // Node 22'de tarayıcıdaki yerel DecompressionStream yolu çalışır.
+      globalThis.DecompressionStream = class {
+        constructor(bicim) {
+          assert.equal(bicim, 'deflate-raw');
+          const parcalar = [];
+          return new TransformStream({
+            transform(parca) { parcalar.push(Buffer.from(parca)); },
+            flush(controller) { controller.enqueue(zlib.inflateRawSync(Buffer.concat(parcalar))); },
+          });
+        }
+      };
+    }
+    assert.equal(await zipdenMetin(zipKur('_chat.txt', METIN.repeat(50), 8)), METIN.repeat(50));
+  } finally {
+    globalThis.DecompressionStream = gercek;
+  }
 });
 
 test('Zip olmayan veya .txt içermeyen dosyada anlaşılır hata verir', async () => {
